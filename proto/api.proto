@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package api;
+
+service Api {
+    rpc call(HttpRequest) returns (HttpResponse) {}
+}
+
+message HttpRequest {
+    string url = 1;
+    string path = 2;
+    optional string query = 3;
+    oneof method {
+        Get get = 4;
+        Post post = 5;
+        Put put = 6;
+        Patch patch = 7;
+        Delete delete = 8;
+        Connect connect = 9;
+        Options options = 10;
+        Trace trace = 11;
+        Head head = 12;
+        string other = 13;
+    }
+    repeated Header headers = 14;
+    optional bytes body = 15;
+}
+message Get {}
+message Post {}
+message Put {}
+message Patch {}
+message Delete {}
+message Connect {}
+message Options {}
+message Trace {}
+message Head {}
+
+message HttpResponse {
+    uint32 status = 1;
+    repeated Header headers = 2;
+    bytes body = 3;
+}
+
+message Header {
+    bytes Name = 1;
+    bytes Value = 2;
+}

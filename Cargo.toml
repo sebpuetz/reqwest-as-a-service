@@ -1,0 +1,35 @@
+[package]
+name = "reqwest-as-a-service"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1"
+bytes = "1"
+headers = "0.3"
+http = "0.2"
+hyper = "0.14"
+prost = "0.10"
+reqwest = { version = "0.11", default-features = false, features = ["rustls-tls"] }
+thiserror = "1"
+tokio = { version = "1", features = ["full"] }
+tonic = { version = "0.7", features = [] }
+tracing-subscriber = "0.3"
+tracing = "0.1"
+url = "2.2.2"
+
+[build-dependencies]
+anyhow = "1"    
+tonic-build = { version = "0.7", features = ["prost"] }
+
+[dev-dependencies]
+reqwest-as-a-service = { path = ".", features = ["with-client"] }
+wiremock = "0.5"
+tokio-stream = { version = "0.1", features = ["net"]}
+tower-service = "0.3"
+
+[features]
+default = []
+with-client = []
